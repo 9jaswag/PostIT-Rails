@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   get 'index/index'
 
-  resources :user
+  resources :users
 
   root 'index#index'
 
