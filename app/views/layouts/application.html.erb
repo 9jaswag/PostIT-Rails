@@ -9,6 +9,27 @@
   </head>
 
   <body>
-    <%= yield %>
+    <div class="site-wrapper">
+      <div class="site-wrapper-inner">
+        <div class="cover-container">
+          <header class="masthead clearfix">
+            <div class="inner">
+              <h3 class="masthead-brand">PostIT</h3>
+              <nav class="nav nav-masthead">
+                <a class="nav-link active" href="/">Home</a>
+                <a class="nav-link" href="/user">Get Started</a>
+                <a class="nav-link" href="/contact">Contact</a>
+              </nav>
+            </div>
+          </header>
+          <%= yield %>
+          <footer class="mastfoot">
+            <div class="inner">
+              <p>&copy;2017 <a href="https://github.com/9jaswag/postit">PostIT</a>.</p>
+            </div>
+          </footer>
+        </div>
+      </div>
+    </div>
   </body>
 </html>

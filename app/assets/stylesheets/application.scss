@@ -15,4 +15,70 @@
  */
 
  // Custom bootstrap variables must be set or imported *before* bootstrap.
-@import "bootstrap";
+ @import "bootstrap";
+
+ $primary-color: #1e2440;
+ $secondary-color: #f04a57;
+ $third-color: #f2efe2;
+
+ html, body {
+   background: $primary-color;
+   color: $third-color;
+ }
+
+ h1, h2, h3, h4, h5, h6, .lead {
+   color: $secondary-color;
+ }
+
+ /* Custom default button */
+.btn-secondary,
+.btn-secondary:hover,
+.btn-secondary:focus {
+  color: $primary-color;
+  text-shadow: none; /* Prevent inheritance from `body` */
+  background-color: $third-color;
+  border: .05rem solid #fff;
+}
+
+.nav-tabs > li {
+  float: left;
+  margin-bottom: -1px;
+}
+
+.nav > li {
+  position: relative;
+  display: block;
+}
+
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover {
+  color: #555;
+  cursor: default;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-bottom-color: transparent;
+}
+
+.nav-tabs > li > a {
+  margin-right: 2px;
+  line-height: 1.42857143;
+  border: 1px solid transparent;
+  border-radius: 4px 4px 0 0;
+}
+
+.nav > li > a {
+  position: relative;
+  display: block;
+  padding: 10px 15px;
+}
+
+.nav-tabs > li >a {
+  margin-right: 2px;
+  line-height: 1.42857143;
+  border: 1px solid transparent;
+  border-radius: 4px 4px 0 0;
+}
+
+.nav-tabs {
+  margin-bottom: 15px;
+}
+
