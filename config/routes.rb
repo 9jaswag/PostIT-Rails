@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
-  get 'users/new'
-
   get 'index/index'
+
+  resources :user
 
   root 'index#index'
 
