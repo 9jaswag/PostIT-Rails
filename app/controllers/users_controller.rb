@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   def index
+    # @user = User.find(params[:username])
   end
 
   def show
@@ -13,8 +14,11 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
 
-    @user.save
-    redirect_to @user
+    if @user.save
+      redirect_to @user
+    else
+      render 'new'
+    end
   end
 
   private

@@ -10,11 +10,11 @@
       <%= form_for :user do |f| %>
         <div class="form-row">
           <div class="col-md-12">
-            <%= f.label :username_signup, class: "control-label" %>
+            <%= f.label :username_signup, "Username", class: "control-label" %>
             <%= f.text_field :username_signup, class: "form-control" %>
           </div>
           <div class="col-md-12">
-            <%= f.label :password_signup, class: "control-label" %>
+            <%= f.label :password_signup, "Password", class: "control-label" %>
             <%= f.password_field :password_signup, class: "form-control" %>
             <small id="passwordHelpBlock" class="form-text text-muted">
               Your password must be at least 6 characters long.
