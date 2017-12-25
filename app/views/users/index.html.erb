@@ -7,15 +7,15 @@
   <!-- Tab panes -->
   <div class="tab-content">
     <div role="tabpanel" class="tab-pane active" id="sign-in">
-      <%= form_with scope: :user, local: true do |f| %>
+      <%= form_with scope: :session, url: login_path, local: true do |f| %>
         <div class="form-row">
           <div class="col-md-12">
-            <%= f.label :username_signup, "Username", class: "control-label" %>
-            <%= f.text_field :username_signup, class: "form-control" %>
+            <%= f.label :username_signin, "Username", class: "control-label" %>
+            <%= f.text_field :username_signin, class: "form-control" %>
           </div>
           <div class="col-md-12">
-            <%= f.label :password_signup, "Password", class: "control-label" %>
-            <%= f.password_field :password_signup, class: "form-control" %>
+            <%= f.label :password_signin, "Password", class: "control-label" %>
+            <%= f.password_field :password_signin, class: "form-control" %>
             <small id="passwordHelpBlock" class="form-text text-muted">
               Your password must be at least 6 characters long.
             </small>
