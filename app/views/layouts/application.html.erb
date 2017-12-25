@@ -16,8 +16,8 @@
             <div class="inner">
               <h3 class="masthead-brand">PostIT</h3>
               <nav class="nav nav-masthead">
-                <a class="nav-link active" href="/">Home</a>
-                <a class="nav-link" href="/users">Get Started</a>
+                <%= link_to "Home", root_path, class: "nav-link active" %>
+                <%= link_to "Get Started", new_user_path, class: "nav-link" %>
                 <a class="nav-link" href="/contact">Contact</a>
               </nav>
             </div>
