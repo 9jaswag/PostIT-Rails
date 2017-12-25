@@ -16,6 +16,8 @@ class UsersController < ApplicationController
     # render plain: params[:user].inspect
 
     if @user.save
+      log_in @user
+      flash[:success] = "Signup successful! Welcome!"
       redirect_to @user
     else
       render 'index'
