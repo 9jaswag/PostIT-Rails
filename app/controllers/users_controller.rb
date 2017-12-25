@@ -13,6 +13,7 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
+    # render plain: params[:user].inspect
 
     if @user.save
       redirect_to @user
