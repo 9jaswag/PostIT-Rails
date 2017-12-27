@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171224135702) do
+ActiveRecord::Schema.define(version: 20171227145741) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "groups", force: :cascade do |t|
+    t.string "name"
+    t.string "owner"
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_groups_on_name", unique: true
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "username"
@@ -25,9 +34,9 @@ ActiveRecord::Schema.define(version: 20171224135702) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "password"
-    t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["phone"], name: "index_users_on_phone", unique: true
-    t.index ["username"], name: "index_users_on_username", unique: true
+    t.index ["email"], name: "index_users_on_email"
+    t.index ["phone"], name: "index_users_on_phone"
+    t.index ["username"], name: "index_users_on_username"
   end
 
 end
