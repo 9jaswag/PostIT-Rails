@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  # before_action :logged_in_user, only: [:create]
+
   def index
     # @user = User.find(params[:username])
   end
@@ -27,5 +29,19 @@ class UsersController < ApplicationController
   private
     def user_params
       params.require(:user).permit(:username, :email, :phone, :password)
+    end
+
+    # confirm logged-in user
+    def logged_in_user
+      unless logged_in?
+        flash[:danger] = "Please log in"
+        redirect_to users_path
+      end
+    end
+
+    # confirm correct user
+    def correct_user
+      @user = User.find(params[:id])
+      redirect_to(root_url) unless current_user?(@user)
     end
 end
