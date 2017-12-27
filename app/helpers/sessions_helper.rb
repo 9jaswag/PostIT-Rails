@@ -12,7 +12,7 @@ module SessionsHelper
 
   # Find current user
   def current_user
-    @current_user ||= User.find_by(id: session[:user_id])
+    @current_user ||= User.select(:id, :username, :email).find_by(id: session[:user_id])
   end
 
   # Return true if user is logged in or false if otherwise
