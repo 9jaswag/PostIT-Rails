@@ -1,0 +1,36 @@
+<h3 class="text-center">Create a new group</h3>
+
+<div class="container">
+  <% if @group.errors.any? %>
+    <ul>
+        <% @group.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+  <% end %>
+</div>
+
+<div class="container">
+  <%= form_with scope: :group, url: groups_path, local:true do |f| %>
+    <div class="form-group">
+      <div class="col-md-12">
+        <%= f.label :name, "Group Name", class: "control-label" %>
+        <%= f.text_field :name, required: true, class: "form-control" %>
+        <small id="nameHelp" class="form-text text-muted">30 chars max.</small>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-md-12">
+        <%= f.label :description, "Group Description", class: "control-label" %>
+        <%= f.text_field :description, required: true, class: "form-control" %>
+        <small id="descriptionHelp" class="form-text text-muted">60 chars max.</small>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-md-6">
+        <%= f.submit 'Create Group', class: 'btn btn-primary' %>
+      </div>
+    </div>
+  <% end %>
+</div>
+
