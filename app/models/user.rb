@@ -3,6 +3,7 @@ class User < ApplicationRecord
   before_save { self.username = username.downcase }
   has_many :group_members
   has_many :groups, through: :group_members
+  has_many :messages
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
   validates :username, presence: true, length: { maximum: 20 },
                         uniqueness: true
