@@ -6,9 +6,7 @@ Rails.application.routes.draw do
 
   resources :users
   resources :groups do
-    # message do
-    #   get :message
-    # end
+    resources :messages
   end
 
   root 'index#index'
