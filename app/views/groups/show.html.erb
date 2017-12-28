@@ -1,3 +1,34 @@
-<%= @group.name %>
-<br/>
-<%= @group.users.to_json %>
+<div class="container-fluid">
+  <div class="col-md-6">
+    Group messages
+  </div>
+  <div class="col-md-6">
+    <%= form_with scope: :message, url: group_messages_path(group_id: params[:id]), local: true do |f| %>
+      <div class="form-group">
+        <div class="col-md-12">
+          <%= f.label :title, "Message Title", class: "control-label" %>
+          <%= f.text_field :title, required: true, class: "form-control" %>
+          <small id="titleHelp" class="form-text text-muted">30 chars max.</small>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-md-12">
+          <%= f.label :body, "Message Body", class: "control-label" %>
+          <%= f.text_area :body, required: true, class: "form-control" %>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-md-12">
+          <%= f.label :priority, "Message priority", class: "control-label" %>
+          <%= f.select :priority, [['Normal', 'normal'], ['Urgent', 'urgent',], ['Critical', 'critical']], {}, { class: "form-control form-control-sm" } %>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-md-6">
+          <%= f.submit 'Post Message', class: 'btn btn-primary' %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+
