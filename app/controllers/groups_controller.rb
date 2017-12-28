@@ -1,5 +1,5 @@
 class GroupsController < ApplicationController
-  before_action :logged_in_user, only: [:index, :show, :new, :create]
+  before_action :logged_in_user
   def index
     @groups = Group.all
   end
