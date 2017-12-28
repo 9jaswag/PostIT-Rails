@@ -14,9 +14,10 @@ class GroupsController < ApplicationController
   def create
     @group = Group.new(group_params)
     @group[:owner] = current_user.username
+    @group.group_members.build(user_id: current_user.id)
 
     if @group.save
-      flash[:success] = "Signup successful! Welcome!"
+      flash[:success] = "Group created successfully"
       redirect_to @group
     else
       render 'new'
