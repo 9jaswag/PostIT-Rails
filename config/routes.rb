@@ -5,7 +5,11 @@ Rails.application.routes.draw do
   delete '/logout',  to: 'sessions#destroy'
 
   resources :users
-  resources :groups
+  resources :groups do
+    # message do
+    #   get :message
+    # end
+  end
 
   root 'index#index'
 

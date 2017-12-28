@@ -1,2 +1,20 @@
-<h2>Group Dashboard</h2>
-<%= link_to "Create New Group", new_group_path, class: "btn btn-primary" %>
+<div class="container-fluid">
+  <h2>Group Dashboard</h2>
+  <%= link_to "Create New Group", new_group_path, class: "btn btn-primary float-right" %> <br/>
+</div>
+<div class="container-fliud">
+  <% if @groups %>
+    <% @groups.each do |group| %>
+      <div class="card border-primary mb-3 bg-transparent" style="max-width: 20rem;">
+        <div class="card-body">
+          <h4 class="card-title"><%= group.name %></h4>
+          <p class="card-text"><%= group.description %></p>
+          <%= link_to "Visit Group", group, class: "card-link" %>
+        </div>
+      </div>
+    <% end %>
+  <% else %>
+    <p>No group exists</p>
+  <% end %>
+</div>
+
