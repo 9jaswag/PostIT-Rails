@@ -1,6 +1,14 @@
 <div class="container-fluid">
   <div class="col-md-6">
-    Group messages
+    <% if @group.messages %>
+      <% @group.messages.each do |message| %>
+        <div class="col-md-4">
+          <%= link_to "#{message.title}", group_message_path(group_id: params[:id]), class: "btn btn-sm"  %>
+        </div>
+      <% end %>
+    <% else %>
+      <h5>No message here</h5>
+    <% end %>
   </div>
   <div class="col-md-6">
     <%= form_with scope: :message, url: group_messages_path(group_id: params[:id]), local: true do |f| %>
