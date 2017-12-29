@@ -4,7 +4,14 @@
     <%= flash[:success] %>
   </div>
 <% end %>
-<%= @user.username %>, <%= @user.email %>, <%= @user.phone %>
-<br>
-<%= @user.groups.to_json %>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-4">
+      <h5>@<%= @user.username %></h5>
+    </div>
+    <div class="col-sm-8">
+      <h5>Number of groups: <%= @user.groups.count %></h5>
+    </div>
+  </div>
+</div>
 

@@ -1,14 +1,22 @@
-<div class="container-fluid">
-  <h5>Group Dashboard</h5>
-  <%= link_to "Create New Group", new_group_path, class: "btn btn-primary float-right" %> <br/>
-</div>
-<div class="container-fliud">
-  <% if @groups %>
-    <% @groups.each do |group| %>
-      <%= render group %>
-    <% end %>
-  <% else %>
-    <p>No group exists</p>
-  <% end %>
+<div class="container">
+  <div class="row d-flex align-items-center">
+    <div class="col-sm col-6">
+      <h5>My Dashboard</h5>
+    </div>
+    <div class="col-sm col-6 text-right">
+      <%= link_to "Create New Group", new_group_path, class: "btn btn-primary" %>
+    </div>
+  </div>
 </div>
 
+<div class="container margin-top-2">
+  <div class="row">
+    <% if @groups %>
+      <% @groups.each do |group| %>
+        <%= render group %>
+      <% end %>
+    <% else %>
+      <h5>No Group Available</h5>
+    <% end %>
+  </div>
+</div>
