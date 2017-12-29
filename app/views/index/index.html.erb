@@ -5,6 +5,8 @@
     <p class="lead">
       <% unless logged_in? %>
         <%= link_to "Get Started", users_path, class: "btn btn-lg btn-secondary" %>
+      <% else %>
+        <%= link_to "Go to dashboard", groups_path, class: "btn btn-lg btn-secondary" %>
       <% end %>
     </p>
   </main>
