@@ -1,7 +1,7 @@
 <% if !users.empty? %>
   <% users.each do |user| %>
     <div class="col-sm-2 col-2">
-      <%= link_to "@#{user.username}", :back, class: "badge badge-primary user-chip" %>
+      <%= link_to "@#{user.username}", groups_add_member_path(user_id: user.id), method: :post, remote: true, class: "badge badge-primary user-chip" %>
     </div>
   <% end %>
 <% else %>

@@ -32,8 +32,22 @@ class GroupsController < ApplicationController
     end
   end
 
+  def add_member
+    group_member = GroupMember.new(group_member_params)
+    
+    if group_member.save
+      flash[:success] = "User added successfully"
+    else
+      render 'show'
+    end
+  end
+
   private
     def group_params
       params.require(:group).permit(:name, :description)
+    end
+
+    def group_member_params
+      params.permit(:group_id, :user_id)
     end
 end

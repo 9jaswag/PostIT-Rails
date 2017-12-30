@@ -11,18 +11,22 @@ $(document).ready ->
   #     success: (data) ->
   #     console.log data
 
+  # search for a user to add to group
   addUserInput = $('#username')
   searchResultDiv = $('#search-results')
 
   addUserInput.keyup () ->
+    group_id = location.pathname.split('/')[2]
     username = addUserInput.val()
     if username.length > 0
       $.ajax
         type: 'GET'
-        url: "/users/search/#{username}"
+        url: "/users/search/#{username}/#{group_id}"
         # success: (users) ->
         #   users.map (user) ->
         #     console.log user.username
         #     return
     else
       searchResultDiv.html('')
+
+  # add user to group
