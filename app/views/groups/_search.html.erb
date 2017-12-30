@@ -1,0 +1,5 @@
+<% users.each do |user| %>
+  <div class="col-sm-2 col-2">
+    <%= link_to "@#{user.username}", :back, class: "badge badge-primary user-chip" %>
+  </div>
+<% end %>

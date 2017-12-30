@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   delete '/logout',  to: 'sessions#destroy'
 
   scope "/users", as: "users" do
-    get "/search/:username" => "users#search", as: "search"
+    get "/search/:username" => "groups#search", as: "search"
   end
 
   resources :users

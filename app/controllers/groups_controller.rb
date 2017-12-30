@@ -25,6 +25,13 @@ class GroupsController < ApplicationController
     end
   end
 
+  def search
+    @users = User.search(params[:username])
+    respond_to do |format|
+      format.js
+    end
+  end
+
   private
     def group_params
       params.require(:group).permit(:name, :description)
