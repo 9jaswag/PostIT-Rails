@@ -9,7 +9,7 @@ $(document).ready ->
   #     url: "/users/#{username}"
   #     type: 'GET'
   #     success: (data) ->
-  #     console.log data  
+  #     console.log data
 
   addUserInput = document.querySelector('#username')
 
@@ -18,5 +18,7 @@ $(document).ready ->
     $.ajax
       type: 'GET'
       url: "/users/search/#{username}"
-      success: (data) ->
-        console.log data 
+      # success: (users) ->
+      #   users.map (user) ->
+      #     console.log user.username
+      #     return

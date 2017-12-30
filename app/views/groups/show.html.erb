@@ -42,8 +42,9 @@
       <div class="margin-top-2">
         <h5 class="">Add users to <%= @group.name %></h5>
         <%= text_field_tag "username", nil, placeholder: "Enter a username", class: "form-control form-control-sm" %>
-        <small id="nameHelp" class="form-text text-muted">Username will appear below if there's a match.</small>
+        <small id="nameHelp" class="form-text text-muted">Username will appear below if there's a match. Click user to add or remove from group</small>
       </div>
+      <div id="search-results" class="row margin-top"></div>
     </div>
   </div>
 </div>
