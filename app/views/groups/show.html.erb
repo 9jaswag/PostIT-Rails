@@ -1,9 +1,9 @@
 <div class="container-fluid">
-  <h5><%= @group.name %> Message Board</h5>
-  <div class="row margin-top-2">
+  <div class="row">
     <div class="col-sm-6">
+      <h5><%= @group.name %> Message Board</h5>
       <% if @group.messages.count > 0 %>
-        <div class="card border border-primary bg-transparent rounded-0">
+        <div class="card border border-primary bg-transparent rounded-0 margin-top-2">
           <div class="card-header secondary-color">
             Group Messages
           </div>
@@ -38,6 +38,11 @@
             <%= f.submit 'Post Message', class: 'btn btn-primary' %>
           </div>
         <% end %>
+      </div>
+      <div class="margin-top-2">
+        <h5 class="">Add users to <%= @group.name %></h5>
+        <%= text_field_tag "username", nil, placeholder: "Enter a username", class: "form-control form-control-sm" %>
+        <small id="nameHelp" class="form-text text-muted">Username will appear below if there's a match.</small>
       </div>
     </div>
   </div>

@@ -4,6 +4,10 @@ Rails.application.routes.draw do
   post   '/login',   to: 'sessions#create'
   delete '/logout',  to: 'sessions#destroy'
 
+  scope "/users", as: "users" do
+    get "/search/:username" => "users#search", as: "search"
+  end
+
   resources :users
   resources :groups do
     resources :messages
