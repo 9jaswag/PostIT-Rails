@@ -11,14 +11,18 @@ $(document).ready ->
   #     success: (data) ->
   #     console.log data
 
-  addUserInput = document.querySelector('#username')
+  addUserInput = $('#username')
+  searchResultDiv = $('#search-results')
 
-  $('#username').on 'keyup', ->
-    username = $('#username').val()
-    $.ajax
-      type: 'GET'
-      url: "/users/search/#{username}"
-      # success: (users) ->
-      #   users.map (user) ->
-      #     console.log user.username
-      #     return
+  addUserInput.keyup () ->
+    username = addUserInput.val()
+    if username.length > 0
+      $.ajax
+        type: 'GET'
+        url: "/users/search/#{username}"
+        # success: (users) ->
+        #   users.map (user) ->
+        #     console.log user.username
+        #     return
+    else
+      searchResultDiv.html('')
