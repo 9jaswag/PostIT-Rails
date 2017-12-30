@@ -26,7 +26,7 @@ class UsersController < ApplicationController
   end
 
   def search
-    @user = User.where(username: params[:username])
+    @user = User.search(params[:username])
     respond_to do |format|
       format.json { render json: @user }
     end

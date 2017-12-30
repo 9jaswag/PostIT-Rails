@@ -13,4 +13,12 @@ class User < ApplicationRecord
   validates :phone, presence: true, uniqueness: true
   validates :password, presence: true, length: { minimum: 6 }
   has_secure_password
+
+  def self.search(search_term)
+    if search_term.blank?
+      all
+    else
+      where('username LIKE ?', "%#{search_term}%")
+    end
+  end
 end
