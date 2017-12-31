@@ -53,7 +53,7 @@ class GroupsController < ApplicationController
       group_member = GroupMember.new(group_member_params)
       
       if group_member.save
-        @message = "User has been added successfully"
+        @message = "User has been added to group"
         respond_to do |format|
           format.js
         end
