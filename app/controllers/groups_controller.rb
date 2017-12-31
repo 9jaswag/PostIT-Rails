@@ -33,12 +33,23 @@ class GroupsController < ApplicationController
   end
 
   def add_member
-    group_member = GroupMember.new(group_member_params)
-    
-    if group_member.save
-      flash[:success] = "User added successfully"
+    member = GroupMember.where(user_id: params[:user_id], group_id: params[:group_id])
+    if member.exists?
+      @message = "User is already a group member"
+      respond_to do |format|
+        format.js
+      end
     else
-      render 'show'
+      group_member = GroupMember.new(group_member_params)
+      
+      if group_member.save
+        @message = "User has been added successfully"
+        respond_to do |format|
+          format.js
+        end
+      else
+        render 'show'
+      end
     end
   end
 
