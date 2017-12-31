@@ -26,7 +26,17 @@ class GroupsController < ApplicationController
   end
 
   def search
-    @users = User.search(params[:username])
+    users = User.search(params[:username])
+    @users = []
+    users.each do |user|
+      member = GroupMember.where(user_id: user.id, group_id: params[:group_id])
+      if member.exists?
+        @users << { user: user, is_member: true}
+      else
+        @users << { user: user, is_member: false}
+      end
+    end
+
     respond_to do |format|
       format.js
     end
@@ -50,6 +60,23 @@ class GroupsController < ApplicationController
       else
         render 'show'
       end
+    end
+  end
+
+  def remove_member
+    member = GroupMember.where(user_id: params[:user_id], group_id: params[:group_id])
+    if member.exists?
+      if member.destroy(member[0].id)
+        @message = "User has been removed from group"
+        puts @message
+        respond_to do |format|
+          format.js
+        end
+      else
+        render 'show'
+      end
+    else
+      render 'show'
     end
   end
 

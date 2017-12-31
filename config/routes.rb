@@ -10,6 +10,7 @@ Rails.application.routes.draw do
 
   scope "/groups", as: "groups" do
     post "/:group_id/user/:user_id" => "groups#add_member", as: "add_member"
+    delete "/:group_id/user/:user_id" => "groups#remove_member", as: "remove_member"
   end
 
   resources :users

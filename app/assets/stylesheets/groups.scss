@@ -34,7 +34,12 @@ a.btn.btn-link.back-btn {
   text-decoration: none;
 }
 
-.badge.badge-primary.user-chip {
+.badge.user-chip {
   font-style: italic;
   font-weight: 100;
+}
+
+#addHelp, #removeHelp {
+  font-size: 0.7rem;
+  font-style: italic;
 }
