@@ -58,4 +58,10 @@ module SessionsHelper
     redirect_to(groups_path) unless current_user.groups.include?(@group)
     flash[:danger] = "You do not belong to that group" unless current_user.groups.include?(@group)
   end
+
+  # return true if user is group owner
+  def is_group_owner(group_id)
+    @group = Group.find(group_id)
+    @group[:owner] == current_user.username
+  end
 end

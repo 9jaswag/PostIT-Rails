@@ -65,19 +65,23 @@ class GroupsController < ApplicationController
   end
 
   def remove_member
-    member = group_member(params[:user_id], params[:group_id])
-    if member.exists?
-      if member.destroy(member[0].id)
-        @message = "User has been removed from group"
-        puts @message
-        respond_to do |format|
-          format.js
+    if is_group_owner(params[:group_id])
+      member = group_member(params[:user_id], params[:group_id])
+      if member.exists?
+        if member.destroy(member[0].id)
+          @message = "User has been removed from group"
+          puts @message
+          respond_to do |format|
+            format.js
+          end
+        else
+          render 'show'
         end
       else
         render 'show'
       end
     else
-      render 'show'
+      @message = "Why you wanna do like that? It's not your group"
     end
   end
 
