@@ -20,6 +20,7 @@
           <div class="navbar-nav ml-md-auto d-md-flex">
             <% if logged_in? %>
               <%= link_to "Dashboard", groups_path, class: "nav-item nav-link active" %>
+              <%= link_to "Profile", current_user, class: "nav-item nav-link" %>
               <%= link_to "Log out", logout_path, method: :delete, class: "nav-item nav-link" %>
             <% end %>
             <% unless logged_in? %>
