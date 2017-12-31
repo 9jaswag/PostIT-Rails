@@ -51,4 +51,11 @@ module SessionsHelper
     @user = User.find(params[:id])
     redirect_to(root_url) unless current_user?(@user)
   end
+
+  # return to dashboard if user is not a group member
+  def is_group_member(group_id)
+    @group = Group.find(group_id)
+    redirect_to(groups_path) unless current_user.groups.include?(@group)
+    flash[:danger] = "You do not belong to that group" unless current_user.groups.include?(@group)
+  end
 end

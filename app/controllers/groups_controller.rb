@@ -5,6 +5,7 @@ class GroupsController < ApplicationController
   end
 
   def show
+    is_group_member(params[:id])
     @group = Group.find(params[:id])
   end
 
