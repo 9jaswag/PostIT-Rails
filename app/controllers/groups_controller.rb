@@ -29,7 +29,7 @@ class GroupsController < ApplicationController
     users = User.search(params[:username])
     @users = []
     users.each do |user|
-      member = GroupMember.where(user_id: user.id, group_id: params[:group_id])
+      member = group_member(user.id, params[:group_id])
       if member.exists?
         @users << { user: user, is_member: true}
       else
@@ -43,7 +43,7 @@ class GroupsController < ApplicationController
   end
 
   def add_member
-    member = GroupMember.where(user_id: params[:user_id], group_id: params[:group_id])
+    member = group_member(params[:user_id], params[:group_id])
     if member.exists?
       @message = "User is already a group member"
       respond_to do |format|
@@ -64,7 +64,7 @@ class GroupsController < ApplicationController
   end
 
   def remove_member
-    member = GroupMember.where(user_id: params[:user_id], group_id: params[:group_id])
+    member = group_member(params[:user_id], params[:group_id])
     if member.exists?
       if member.destroy(member[0].id)
         @message = "User has been removed from group"
@@ -87,5 +87,10 @@ class GroupsController < ApplicationController
 
     def group_member_params
       params.permit(:group_id, :user_id)
+    end
+
+    # returns a group member
+    def group_member(user_id, group_id)
+      member = GroupMember.where(user_id: user_id, group_id: group_id)
     end
 end
