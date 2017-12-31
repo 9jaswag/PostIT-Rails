@@ -19,7 +19,7 @@ class UsersController < ApplicationController
     if @user.save
       log_in @user
       flash[:success] = "Signup successful! Welcome!"
-      redirect_to @user
+      redirect_to groups_path
     else
       render 'index'
     end
