@@ -5,7 +5,7 @@ class MessagesController < ApplicationController
   end
 
   def show
-    is_group_member(params[:id])
+    is_group_member(params[:group_id])
     @message = Message.find(params[:id])
   end
 
