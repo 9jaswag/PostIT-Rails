@@ -7,6 +7,9 @@ class GroupsController < ApplicationController
   def show
     is_group_member(params[:id])
     @group = Group.find(params[:id])
+  rescue StandardError
+    flash[:danger] = "Group does not exist"
+    redirect_to groups_path
   end
 
   def new
@@ -27,6 +30,7 @@ class GroupsController < ApplicationController
   end
 
   def search
+    # use joins here later
     users = User.search(params[:username])
     @users = []
     users.each do |user|

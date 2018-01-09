@@ -7,6 +7,9 @@ class MessagesController < ApplicationController
   def show
     is_group_member(params[:group_id])
     @message = Message.find(params[:id])
+  rescue StandardError
+    flash[:danger] = "Message does not exist"
+    redirect_to group_path(params[:group_id])
   end
 
   def new
