@@ -9,7 +9,10 @@ class MessagesController < ApplicationController
     # confirm if message belongs to group
     # Group.joins(:messages).where('group_id = ?, messages.id =?', 2, 2)
     @message = Message.find(params[:id])
-    redirect_to group_path(params[:group_id]) unless Group.find(params[:group_id]).messages.include?(@message)
+    unless Group.find(params[:group_id]).messages.include?(@message)
+      flash[:danger] = "Message does not exist"
+      redirect_to group_path(params[:group_id])
+    end
   rescue StandardError
     flash[:danger] = "Message does not exist"
     redirect_to group_path(params[:group_id])
