@@ -43,3 +43,9 @@ a.btn.btn-link.back-btn {
   font-size: 0.7rem;
   font-style: italic;
 }
+
+
+#search-results {
+  height: 20vh;
+  overflow-y: auto;
+}

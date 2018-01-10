@@ -1,7 +1,7 @@
 class GroupsController < ApplicationController
   before_action :logged_in_user
   def index
-    @groups = current_user.groups
+    @groups = current_user.groups.paginate(page: params[:page], per_page: 2)
   end
 
   def show

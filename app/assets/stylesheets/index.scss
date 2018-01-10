@@ -28,3 +28,30 @@ body {
     width: 42rem;
   }
 }
+
+ul.pagination.pagination li {
+  &:first-child {
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+    border-left: 1px solid #f2efe2;
+  }
+
+  &:last-child {
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+  }
+
+  a {
+    display: block;
+    text-decoration: none;
+  }
+
+  &.active {
+    color: #f04a57;
+  }
+
+  padding: 0.3rem 1rem;
+  border: 1px solid #f2efe2;
+  border-left: 0;
+  cursor: pointer;
+}
