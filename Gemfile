@@ -63,3 +63,6 @@ gem 'pg'
 gem "figaro"
 # For jwt authentication
 gem "jwt"
+# For pagination
+gem 'will_paginate'
+gem 'bootstrap-will_paginate'
