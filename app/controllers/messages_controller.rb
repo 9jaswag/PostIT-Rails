@@ -11,11 +11,12 @@ class MessagesController < ApplicationController
     @message = Message.find(params[:id])
     unless Group.find(params[:group_id]).messages.include?(@message)
       flash[:danger] = "Message does not exist"
-      redirect_to group_path(params[:group_id])
+      return
     end
   rescue StandardError
     flash[:danger] = "Message does not exist"
     redirect_to group_path(params[:group_id])
+    return
   end
 
   def new

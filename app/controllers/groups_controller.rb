@@ -7,9 +7,11 @@ class GroupsController < ApplicationController
   def show
     is_group_member(params[:id])
     @group = Group.find(params[:id])
+    @messages = @group.messages.paginate(page: params[:page], per_page: 2)
   rescue StandardError
     flash[:danger] = "Group does not exist"
     redirect_to groups_path
+    return
   end
 
   def new
@@ -24,6 +26,7 @@ class GroupsController < ApplicationController
     if @group.save
       flash[:success] = "Group created successfully"
       redirect_to @group
+      return
     else
       render 'new'
     end

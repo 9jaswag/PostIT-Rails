@@ -8,10 +8,13 @@
             Group Messages
           </div>
           <ul class="list-group list-group-flush">
-            <% @group.messages.each do |message| %>
+            <% @messages.each do |message| %>
               <%= link_to "#{message.title}", group_message_path(group_id: params[:id], id: message.id), class: "list-group-item list-group-item-action border border-primary border-left-0 border-right-0 rounded-0 bg-transparent" %>
             <% end %>
           </ul>
+        </div>
+        <div class="margin-top-2">
+          <%= will_paginate @messages, renderer: BootstrapPagination::Rails %>
         </div>
       <% else %>
         <div class="d-flex justify-content-center align-items-center index-flex container">
