@@ -20,7 +20,7 @@ class UsersController < ApplicationController
     # render plain: params[:user].inspect
 
     if @user.save
-      UserMailer.account_activation(@user).deliver_now
+      @user.send_activation_mail
       flash[:success] = "Thanks for signing up. Check your email to activate your account"
       # clear cookie just in case
       log_out
