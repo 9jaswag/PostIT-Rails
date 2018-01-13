@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   resources :groups do
     resources :messages
   end
+  resources :account_activations, only: [:edit]
 
   root 'index#index'
 
