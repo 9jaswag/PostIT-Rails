@@ -6,6 +6,9 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+  rescue StandardError => e
+    flash[:danger] = "User does not exist"
+    redirect_to root_path
   end    
 
   def new
@@ -17,9 +20,11 @@ class UsersController < ApplicationController
     # render plain: params[:user].inspect
 
     if @user.save
-      log_in @user
-      flash[:success] = "Signup successful! Welcome!"
-      redirect_to groups_path
+      UserMailer.account_activation(@user).deliver_now
+      flash[:success] = "Thanks for signing up. Check your email to activate your account"
+      # clear cookie just in case
+      log_out
+      redirect_to root_path
     else
       render 'index'
     end

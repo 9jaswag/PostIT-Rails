@@ -41,6 +41,14 @@ class User < ApplicationRecord
     BCrypt::Password.create(string, cost: cost)
   end
 
+  # Returns true if the given token matches the digest.
+  def authenticated?(attribute, token)
+    digest = send("#{attribute}_digest") # no need for self.send as we're in the user model
+    return false if digest.nil?
+    # verify the token matches the digest
+    BCrypt::Password.new(digest).is_password?(token)
+  end
+
   private
     def create_activation_digest
       self.activation_token = User.new_token
