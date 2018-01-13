@@ -15,7 +15,7 @@
       <% @groups.each do |group| %>
         <%= render group %>
       <% end %>
-      <div class="col-12">
+      <div class="col-12 margin-top-2">
         <%= will_paginate @groups, renderer: BootstrapPagination::Rails %>
       </div>
     <% else %>

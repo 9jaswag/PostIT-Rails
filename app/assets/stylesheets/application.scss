@@ -17,6 +17,13 @@
  // Custom bootstrap variables must be set or imported *before* bootstrap.
  @import "bootstrap";
 
+ * {
+  // font-family: 'Macondo', cursive;
+  // font-family: 'Kavivanar', cursive;
+  font-family: 'Open Sans Condensed', sans-serif;
+  // font-family: 'Quicksand', sans-serif;
+ }
+
  $primary-color: #1e2440;
  $secondary-color: #f04a57;
  $third-color: #f2efe2;
@@ -24,6 +31,7 @@
  html, body {
    background: $primary-color;
    color: $third-color;
+   font-size: 18px;
  }
 
  h1, h2, h3, h4, h5, h6, .lead {
