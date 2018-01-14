@@ -8,7 +8,7 @@ class GroupsController < ApplicationController
   def show
     is_group_member(params[:id])
     @group = Group.find(params[:id])
-    @messages = @group.messages.paginate(page: params[:page], per_page: 2)
+    @messages = @group.messages.paginate(page: params[:page], per_page: 6)
   rescue StandardError
     flash[:danger] = "Group does not exist"
     redirect_to groups_path

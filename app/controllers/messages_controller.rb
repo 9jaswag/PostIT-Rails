@@ -1,5 +1,6 @@
 class MessagesController < ApplicationController
   before_action :logged_in_user
+
   def index
     @messages = Message.all    
   end
@@ -29,6 +30,7 @@ class MessagesController < ApplicationController
     @message[:group_id] = params[:group_id]
     respond_to do |format|
       if @message.save
+        send_notification(@message)
         flash[:success] = 'Message was successfully created.'
         format.html { redirect_to group_message_path(id: @message[:id]) }
       else
@@ -40,5 +42,10 @@ class MessagesController < ApplicationController
   private
     def message_params
       params.require(:message).permit(:title, :body, :priority, :readby)
+    end
+
+    def send_notification(message)
+      groupMembers = Group.find(params[:group_id]).users
+      UserMailer.email_notification(groupMembers, message).deliver_now unless message.priority == "normal"
     end
 end
