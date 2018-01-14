@@ -29,11 +29,6 @@ class User < ApplicationRecord
     SecureRandom.urlsafe_base64
   end
 
-  # downcase method
-  # def downcase(attr)
-  #   self.attr = attr.downcase
-  # end
-
   # returns the hash digest of a given string
   def self.digest(string)
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST : BCrypt::Engine.cost

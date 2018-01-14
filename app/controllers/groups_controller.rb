@@ -39,10 +39,12 @@ class GroupsController < ApplicationController
     @users = []
     users.each do |user|
       member = group_member(user.id, params[:group_id])
-      if member.exists?
-        @users << { user: user, is_member: true}
-      else
-        @users << { user: user, is_member: false}
+      if user.activated?
+        if member.exists?
+          @users << { user: user, is_member: true}
+        else
+          @users << { user: user, is_member: false}
+        end
       end
     end
 
