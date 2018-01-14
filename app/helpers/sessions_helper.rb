@@ -41,7 +41,7 @@ module SessionsHelper
   def logged_in_user
     unless logged_in?
       store_location
-      flash[:danger] = "Please log in or create an account"
+      flash[:danger] = "Please sign in or create an account"
       redirect_to users_path
     end
   end
