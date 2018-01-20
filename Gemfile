@@ -64,3 +64,5 @@ gem "jwt"
 # For pagination
 gem 'will_paginate'
 gem 'will_paginate-bootstrap'
+
+ruby "2.4.1"
