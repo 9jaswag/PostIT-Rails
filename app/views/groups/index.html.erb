@@ -1,27 +1,13 @@
-<div class="container">
-  <div class="row d-flex align-items-center">
-    <div class="col-sm col-6">
-      <h5>My Dashboard</h5>
-    </div>
-    <div class="col-sm col-6 text-right">
-      <%= link_to "Create New Group", new_group_path, class: "btn btn-primary" %>
-    </div>
-  </div>
-</div>
-
-<div class="container margin-top-2">
-  <div class="row">
-    <% if @groups.count > 0 %>
-      <% @groups.each do |group| %>
-        <%= render group %>
+<div class="d-flex justify-content-center align-items-center index-flex container">
+  <main role="main" class="inner cover">
+    <h1 class="cover-heading">Notifications done right!</h1>
+    <p class="lead">PostIT is a simple application that allows friends and colleagues create groups for notification</p>
+    <p class="lead">
+      <% unless logged_in? %>
+        <%= link_to "Get Started", users_path, class: "btn btn-lg btn-secondary" %>
+      <% else %>
+        <%= link_to "Go to dashboard", groups_path, class: "btn btn-lg btn-secondary" %>
       <% end %>
-      <div class="col-12 margin-top-2">
-        <%= will_paginate @groups, renderer: BootstrapPagination::Rails %>
-      </div>
-    <% else %>
-      <div class="d-flex justify-content-center align-items-center index-flex container">
-        <h6>You have no groups. Create one now</h6>
-      </div>
-    <% end %>
-  </div>
+    </p>
+  </main>
 </div>
