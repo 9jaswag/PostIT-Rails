@@ -64,5 +64,7 @@ gem "jwt"
 # For pagination
 gem 'will_paginate'
 gem 'will_paginate-bootstrap'
+# For sending email using Sendgrid
+gem 'sendgrid-ruby'
 
 ruby "2.4.1"

@@ -14,9 +14,9 @@ class UserMailerPreview < ActionMailer::Preview
   end
 
   def email_notification
-    users = User.all
+    user = User.first
     message = Message.first
-    UserMailer.email_notification(users, message)
+    UserMailer.email_notification(user, message)
   end
 
 end
