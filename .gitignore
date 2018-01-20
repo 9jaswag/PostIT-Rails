@@ -21,3 +21,10 @@
 /yarn-error.log
 
 .byebug_history
+
+# Ignore application configuration
+/config/application.yml
+
+# Ignore OSx generated files
+.DS_Store
+.idea/

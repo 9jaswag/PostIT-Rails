@@ -1,9 +1,13 @@
-<main role="main" class="inner cover">
-  <h1 class="cover-heading">Notifications done right!</h1>
-  <p class="lead">PostIT is a simple application that allows friends and colleagues create groups for notification</p>
-  <p class="lead">
-    <% unless logged_in? %>
-      <%= link_to "Get Started", users_path, class: "btn btn-lg btn-secondary" %>
-    <% end %>
-  </p>
-</main>
+<div class="d-flex justify-content-center align-items-center index-flex container">
+  <main role="main" class="inner cover">
+    <h1 class="cover-heading">Notifications done right!</h1>
+    <p class="lead">PostIT is a simple application that allows friends and colleagues create groups for notification</p>
+    <p class="lead">
+      <% unless logged_in? %>
+        <%= link_to "Get Started", users_path, class: "btn btn-lg btn-secondary" %>
+      <% else %>
+        <%= link_to "Go to dashboard", groups_path, class: "btn btn-lg btn-secondary" %>
+      <% end %>
+    </p>
+  </main>
+</div>

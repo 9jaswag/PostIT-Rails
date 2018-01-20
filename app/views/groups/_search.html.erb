@@ -1,0 +1,19 @@
+<% if !users.empty? %>
+  <% users.each do |user| %>
+    <% if user[:is_member] %>
+      <div class="col-sm-2 col-2">
+        <%= link_to "@#{user[:user].username}", groups_remove_member_path(user_id: user[:user].id), method: :delete, remote: true, class: "badge badge-primary user-chip" %>
+        <small id="removeHelp" class="form-text text-muted">Click to remove</small>
+      </div>
+    <% else %>
+      <div class="col-sm-2 col-2">
+        <%= link_to "@#{user[:user].username}", groups_add_member_path(user_id: user[:user].id), method: :post, remote: true, class: "badge badge-secondary user-chip" %>
+        <small id="addHelp" class="form-text text-muted">Click to add</small>
+      </div>
+    <% end %>
+  <% end %>
+<% else %>
+  <div class="col-sm">
+  <span class="badge badge-primary user-chip">User not found</span>
+  </div>
+<% end %>

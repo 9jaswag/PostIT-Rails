@@ -1,0 +1,7 @@
+<h1>PostIT</h1>
+
+<p>Hi <%= @user.username %>,</p>
+
+<p>You have a <%= @message.priority %> message on PostIT</p>
+
+<%= link_to "View Message", group_message_url(id: @message[:id], group_id: @message.group.id) %>

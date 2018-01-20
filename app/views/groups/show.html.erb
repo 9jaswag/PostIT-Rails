@@ -1,3 +1,54 @@
-<%= @group.name %>
-<br/>
-<%= @group.users.to_json %>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-6">
+      <h5><%= @group.name %> Message Board</h5>
+      <% if @group.messages.count > 0 %>
+        <div class="card border border-primary bg-transparent rounded-0 margin-top-2">
+          <div class="card-header secondary-color">
+            Group Messages
+          </div>
+          <ul class="list-group list-group-flush">
+            <% @messages.each do |message| %>
+              <%= link_to "#{message.title}", group_message_path(group_id: params[:id], id: message.id), class: "list-group-item list-group-item-action border border-primary border-left-0 border-right-0 rounded-0 bg-transparent" %>
+            <% end %>
+          </ul>
+        </div>
+        <div class="margin-top-2">
+          <%= will_paginate @messages, renderer: BootstrapPagination::Rails %>
+        </div>
+      <% else %>
+        <div class="d-flex justify-content-center align-items-center index-flex container">
+          <h5>No messages here. Post one now</h5>
+        </div>
+      <% end %>
+    </div>
+    <div class="col-sm-6">
+      <div>
+        <h5 class="">Post a new message</h5>
+        <%= form_with scope: :message, url: group_messages_path(group_id: params[:id]), class: "margin-top", local: true do |f| %>
+          <div class="form-group">
+            <%= f.text_field :title, required: true, class: "form-control form-control-sm", placeholder: "Message title" %>
+            <small id="titleHelp" class="form-text text-muted">30 chars max.</small>
+          </div>
+          <div class="form-group">
+            <%= f.text_area :body, required: true, class: "form-control form-control-sm", placeholder: "Message body" %>
+          </div>
+          <div class="form-group">
+            <%= f.label :priority, "Message priority", class: "control-label" %>
+            <%= f.select :priority, [['Normal', 'normal'], ['Urgent', 'urgent',], ['Critical', 'critical']], {}, { class: "form-control form-control-sm" } %>
+          </div>
+          <div class="form-group">
+            <%= f.submit 'Post Message', class: 'btn btn-primary' %>
+          </div>
+        <% end %>
+      </div>
+      <div class="margin-top-2">
+        <h5 class="">Add users to <%= @group.name %></h5>
+        <%= text_field_tag "username", nil, placeholder: "Enter a username", class: "form-control form-control-sm", autocomplete: "off" %>
+        <small id="nameHelp" class="form-text text-muted">Matching usernames will appear below. Click user to add or remove from group</small>
+      </div>
+      <div id="search-results" class="row margin-top"></div>
+    </div>
+  </div>
+</div>
+

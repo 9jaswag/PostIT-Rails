@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  before_action :logged_in_user, only: [:show]
 
   def index
     # @user = User.find(params[:username])
@@ -6,6 +7,10 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    redirect_to root_path unless @user.activated?
+  rescue StandardError => e
+    flash[:danger] = "User does not exist"
+    redirect_to root_path
   end    
 
   def new
@@ -17,9 +22,11 @@ class UsersController < ApplicationController
     # render plain: params[:user].inspect
 
     if @user.save
-      log_in @user
-      flash[:success] = "Signup successful! Welcome!"
-      redirect_to @user
+      @user.send_activation_mail
+      flash[:success] = "Thanks for signing up. Check your email to activate your account"
+      # clear cookie just in case
+      log_out
+      redirect_to root_path
     else
       render 'index'
     end
