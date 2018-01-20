@@ -1,27 +1,14 @@
-<div class="container">
-  <div class="row d-flex align-items-center">
-    <div class="col-sm col-6">
-      <h5>My Dashboard</h5>
-    </div>
-    <div class="col-sm col-6 text-right">
-      <%= link_to "Create New Group", new_group_path, class: "btn btn-primary" %>
-    </div>
-  </div>
+<div class="container-fluid">
+  <h5>Group Dashboard</h5>
+  <%= link_to "Create New Group", new_group_path, class: "btn btn-primary float-right" %> <br/>
+</div>
+<div class="container-fliud">
+  <% if @groups %>
+    <% @groups.each do |group| %>
+      <%= render group %>
+    <% end %>
+  <% else %>
+    <p>No group exists</p>
+  <% end %>
 </div>
 
-<div class="container margin-top-2">
-  <div class="row">
-    <% if @groups.count > 0 %>
-      <% @groups.each do |group| %>
-        <%= render group %>
-      <% end %>
-      <div class="col-12 margin-top-2">
-        <%= will_paginate @groups, renderer: BootstrapPagination::Rails %>
-      </div>
-    <% else %>
-      <div class="d-flex justify-content-center align-items-center index-flex container">
-        <h6>You have no groups. Create one now</h6>
-      </div>
-    <% end %>
-  </div>
-</div>

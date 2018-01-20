@@ -1,6 +1,0 @@
-$('#search-results').html("<%= j render(partial: 'add_member', locals: { message: @message }) %>")
-
-setTimeout( function emptyDiv() {
-  $('#search-results').html("")
-  $('#username').val('')
-}, 2000)

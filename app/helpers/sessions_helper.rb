@@ -41,7 +41,7 @@ module SessionsHelper
   def logged_in_user
     unless logged_in?
       store_location
-      flash[:danger] = "Please sign in or create an account"
+      flash[:danger] = "Please log in or create an account"
       redirect_to users_path
     end
   end
@@ -50,18 +50,5 @@ module SessionsHelper
   def correct_user
     @user = User.find(params[:id])
     redirect_to(root_url) unless current_user?(@user)
-  end
-
-  # return to dashboard if user is not a group member
-  def is_group_member(group_id)
-    @group = Group.find(group_id)
-    redirect_to(groups_path) unless current_user.groups.include?(@group)
-    flash[:danger] = "You do not belong to that group" unless current_user.groups.include?(@group)
-  end
-
-  # return true if user is group owner
-  def is_group_owner(group_id)
-    @group = Group.find(group_id)
-    @group[:owner] == current_user.username
   end
 end
