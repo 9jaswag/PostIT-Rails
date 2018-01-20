@@ -30,7 +30,7 @@ class MessagesController < ApplicationController
     @message[:group_id] = params[:group_id]
     respond_to do |format|
       if @message.save
-        send_notification(@message)
+        send_notification(@message) unless @message.priority == "normal"
         flash[:success] = 'Message was successfully created.'
         format.html { redirect_to group_message_path(id: @message[:id]) }
       else
@@ -46,6 +46,10 @@ class MessagesController < ApplicationController
 
     def send_notification(message)
       groupMembers = Group.find(params[:group_id]).users
-      UserMailer.email_notification(groupMembers, message).deliver_now unless message.priority == "normal"
+      groupMembers.each do |member|
+        unless member.email == message.user.email
+          UserMailer.email_notification(member, message).deliver_now
+        end
+      end
     end
 end

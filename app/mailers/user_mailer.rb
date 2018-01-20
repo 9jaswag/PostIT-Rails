@@ -22,14 +22,10 @@ class UserMailer < ApplicationMailer
     mail to: "to@example.org"
   end
 
-  def email_notification(users, message)
-    users.each do |user|
-      unless user.email == message.user.email
-        @user = user
-        @message = message
+  def email_notification(user, message)
+    @user = user
+    @message = message
 
-        mail to: user.email, subject: "PostIT notification"
-      end
-    end
+    mail to: user.email, subject: "PostIT notification"
   end
 end
