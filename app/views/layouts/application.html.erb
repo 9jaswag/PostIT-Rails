@@ -3,70 +3,40 @@
   <head>
     <title>PostITRails</title>
     <%= csrf_meta_tags %>
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  
+
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <link href="https://fonts.googleapis.com/css?family=Kavivanar|Macondo|Open+Sans+Condensed:300|Quicksand" rel="stylesheet">
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
-    <header class="container">
-      <nav class="navbar navbar-expand-sm navbar-light bg-transparent">
-        <a class="navbar-brand" href="/">PostIT</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarToggle">
-          <div class="navbar-nav ml-md-auto d-md-flex">
-            <% if logged_in? %>
-              <%= link_to "Dashboard", groups_path, class: "nav-item nav-link active" %>
-              <%= link_to "Profile", current_user, class: "nav-item nav-link" %>
-              <%= link_to "Log out", logout_path, method: :delete, class: "nav-item nav-link" %>
-            <% end %>
-            <% unless logged_in? %>
-              <%= link_to "Get Started", users_path, class: "nav-link" %>
-            <% end %>
-            <a class="nav-item nav-link" href="/contact">Contact</a>
-          </div>
-        </div>
-      </nav>
-    </header>
-
-    <div class="container yield-container">
-       <% if flash[:success] %>
-        <div class="container">
-          <div class="row d-flex justify-content-center">
-            <div class="col-sm-7">
-              <div class="alert alert-success alert-dismissible" role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <%= flash[:success] %>
-              </div>
+    <div class="site-wrapper">
+      <div class="site-wrapper-inner">
+        <div class="cover-container">
+          <header class="masthead clearfix">
+            <div class="inner">
+              <h3 class="masthead-brand"><a href="/">PostIT</a></h3>
+              <nav class="nav nav-masthead">
+                <%= link_to "Home", root_path, class: "nav-link active" %>
+                <% if logged_in? %>
+                  <%= link_to "Dashboard", groups_path, class: "nav-link" %>
+                <% end %>
+                <% if logged_in? %>
+                  <%= link_to "Log out", logout_path, method: :delete, class: "nav-link" %>
+                <% else %>
+                  <%= link_to "Get Started", users_path, class: "nav-link" %>
+                <% end %>
+                <a class="nav-link" href="/contact">Contact</a>
+              </nav>
             </div>
-          </div>
-        </div>
-      <% end %>
-      <% if flash[:danger] %>
-        <div class="container">
-          <div class="row d-flex justify-content-center">
-            <div class="col-sm-7">
-              <div class="alert alert-danger alert-dismissible" role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <%= flash[:danger] %>
-              </div>
+          </header>
+          <%= yield %>
+          <footer class="mastfoot">
+            <div class="inner">
+              <p>&copy;2017 <a href="https://github.com/9jaswag/postit">PostIT</a>.</p>
             </div>
-          </div>
+          </footer>
         </div>
-      <% end %>
-      <%= yield %>
+      </div>
     </div>
-
-    <%# <div class="container">
-      <footer class="mastfoot">
-        <div class="inner">
-          <p>&copy;2017 <a href="https://github.com/9jaswag/postit">PostIT</a>.</p>
-        </div>
-      </footer>
-    </div> %>
   </body>
 </html>
