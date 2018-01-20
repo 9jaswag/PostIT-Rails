@@ -13,6 +13,8 @@ Rails.application.routes.draw do
     delete "/:group_id/user/:user_id" => "groups#remove_member", as: "remove_member"
   end
 
+  put "/message/:id/user/:user" => "messages#update", as: "update_readby"
+
   resources :users
   resources :groups do
     resources :messages

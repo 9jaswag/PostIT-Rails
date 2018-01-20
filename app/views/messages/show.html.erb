@@ -12,7 +12,9 @@
             <p class="card-text"><%= @message.body %></p>
           </div>
           <div class="card-footer bg-transparent  border-primary">
-            <%= link_to "Mark as read", group_message_path, class: "card-link float-right" %>
+            <% unless @message.readby.include?(current_user.username) %>
+              <%= link_to "Mark as read", update_readby_path(id: @message.id, user: current_user.username), method: :put, class: "card-link float-right" %>
+            <% end %>
           </div>
         </div>
         <%= link_to "Back", :back, class: "btn btn-secondary" %>
