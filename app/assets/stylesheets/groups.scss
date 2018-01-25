@@ -49,3 +49,13 @@ a.btn.btn-link.back-btn {
   height: 20vh;
   overflow-y: auto;
 }
+
+.relative {
+  position: relative;
+}
+
+.unread-label {
+  position: absolute;
+  top: 22px;
+  right: 8px;
+}

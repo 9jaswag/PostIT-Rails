@@ -1,6 +1,6 @@
 class GroupsController < ApplicationController
   before_action :logged_in_user
-  
+  # Group.unread_count(params[:id], current_user.username)
   def index
     @groups = current_user.groups.paginate(page: params[:page], per_page: 2)
   end
