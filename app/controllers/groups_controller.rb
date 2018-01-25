@@ -2,7 +2,12 @@ class GroupsController < ApplicationController
   before_action :logged_in_user
   # Group.unread_count(params[:id], current_user.username)
   def index
-    @groups = current_user.groups.paginate(page: params[:page], per_page: 2)
+    groups = current_user.groups.paginate(page: params[:page], per_page: 2)
+    @groups = []
+
+    groups.each do |group|
+      @groups << { group: group, unread_count: get_unread_count(group.id) }
+    end
   end
 
   def show
@@ -97,6 +102,10 @@ class GroupsController < ApplicationController
     else
       @message = "Why you wanna do like that? It's not your group"
     end
+  end
+
+  def get_unread_count(id)
+    Group.unread_count(id, current_user.username)
   end
 
   private

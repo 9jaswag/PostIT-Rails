@@ -13,11 +13,9 @@
   <div class="row">
     <% if @groups.count > 0 %>
       <% @groups.each do |group| %>
-        <%= render group %>
+        <%= render "group", group: group %>
       <% end %>
-      <div class="col-12 margin-top-2">
-        <%= will_paginate @groups, renderer: BootstrapPagination::Rails %>
-      </div>
+      
     <% else %>
       <div class="d-flex justify-content-center align-items-center index-flex container">
         <h6>You have no groups. Create one now</h6>
