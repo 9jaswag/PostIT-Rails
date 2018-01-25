@@ -9,7 +9,10 @@
           </div>
           <ul class="list-group list-group-flush">
             <% @messages.each do |message| %>
-              <%= link_to "#{message.title}", group_message_path(group_id: params[:id], id: message.id), class: "list-group-item list-group-item-action border border-primary border-left-0 border-right-0 rounded-0 bg-transparent" %>
+              <div class="relative">
+                <%= link_to "#{message.title}", group_message_path(group_id: params[:id], id: message.id), class: "list-group-item list-group-item-action border border-primary border-left-0 border-right-0 rounded-0 bg-transparent" %>
+                <span class="badge badge-danger user-chip unread-label"><%= "new" unless message.readby.include?(current_user.username) %></span>
+              </div>
             <% end %>
           </ul>
         </div>

@@ -24,6 +24,16 @@ class MessagesController < ApplicationController
     @message = Message.new
   end
 
+  def update
+    @message = Message.find(params[:id])
+    # if user hasn't read messsage
+    if @message and !@message.readby.include?(params[:user])
+      if @message.update(readby: @message.readby << params[:user])
+        redirect_to group_path(@message.group_id)
+      end
+    end
+  end
+
   def create
     @message = current_user.messages.new(message_params)
     @message[:readby] << current_user.username
