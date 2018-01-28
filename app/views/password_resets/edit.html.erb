@@ -1,2 +1,26 @@
-<h1>PasswordResets#edit</h1>
-<p>Find me in app/views/password_resets/edit.html.erb</p>
+<div class="d-flex justify-content-center align-items-center index-flex container">
+  <div class="col-md-7 auth-div">
+    <%= form_with scope: :user, url: reset_path(params[:id]), method: :put, local: true do |f| %>
+      <div class="form-group">
+        <div class="">
+          <%= f.password_field :password, class: "form-control", required: true, placeholder: "Password" %>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="">
+          <%= f.password_field :password_confirmation, class: "form-control", required: true, placeholder: "Confirm password" %>
+          <small id="passwordHelpBlock" class="form-text text-muted">
+            Both passwords must match.
+          </small>
+        </div>
+      </div>
+        <%= hidden_field_tag :email, params[:email] %>
+      <div class="form-group">
+        <div class="">
+          <%= f.submit 'Submit', class: 'btn btn-primary' %>
+          <%= link_to "Go Home", root_path, class: 'card-link margin-left' %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
