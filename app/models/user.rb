@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  attr_accessor :activation_token
+  attr_accessor :activation_token, :reset_token
   before_save { self.email = email.downcase }
   before_save { self.username = username.downcase }
   before_create :create_activation_digest
@@ -36,6 +36,10 @@ class User < ApplicationRecord
     BCrypt::Password.create(string, cost: cost)
   end
 
+  def password_reset_expired?
+    reset_time < 2.hours.ago
+  end
+
   # Returns true if the given token matches the digest.
   def authenticated?(attribute, token)
     digest = send("#{attribute}_digest") # no need for self.send as we're in the user model
@@ -47,6 +51,21 @@ class User < ApplicationRecord
   # Sends activation mail to user
   def send_activation_mail
     UserMailer.account_activation(self).deliver_now
+  end
+
+  # Sends password reset email
+  def send_password_reset_email
+    UserMailer.password_reset(self).deliver_now
+  end
+
+  def create_reset_digest
+    # update(reset_token:, User.digest(User.new_token))
+    # update(reset_time:, Time.zone.now)
+    self.reset_token = User.new_token
+    update_columns(
+      reset_digest: User.digest(reset_token),
+      reset_time: Time.zone.now
+    )
   end
 
   # Activates a user's account
