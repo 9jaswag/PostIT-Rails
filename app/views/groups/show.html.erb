@@ -25,7 +25,7 @@
         </div>
       <% end %>
     </div>
-    <div class="col-sm-6">
+    <div class="col-12 col-sm-4 offset-sm-2">
       <div>
         <h5 class="">Post a new message</h5>
         <%= form_with scope: :message, url: group_messages_path(group_id: params[:id]), class: "margin-top", local: true do |f| %>
