@@ -3,8 +3,8 @@ language: ruby
 rvm:
  - 2.4.1
 before_script:
-  - createuser chuks -s -U postgres
-  - createdb postit_rails_test --username=chuks
+  - createuser andeladeveloper -s -U postgres
+  - createdb postit-rails-test --username=andeladeveloper
   # - psql -c 'create database postit_rails_test;' -U postgres
 script:
   - bundle exec rails db:migrate RAILS_ENV=test
