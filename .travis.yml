@@ -1,0 +1,9 @@
+dist: trusty
+language: ruby
+rvm:
+ - 2.4.1
+before_script:
+  - psql -c 'create database postit-rails-test;' -U postgres
+script:
+  - bundle exec rails db:migrate RAILS_ENV=test
+  - bundle exec rspec
