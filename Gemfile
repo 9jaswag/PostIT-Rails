@@ -37,6 +37,14 @@ group :development, :test do
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '~> 2.13'
   gem 'selenium-webdriver'
+  gem 'factory_bot_rails'
+  gem 'rspec-rails', '~> 3.8'
+end
+
+group :test do
+  gem 'shoulda-matchers', '4.0.0.rc1'
+  gem 'rails-controller-testing' # If you are using Rails 5.x with shoudla matchers
+  gem 'database_cleaner'
 end
 
 group :development do
