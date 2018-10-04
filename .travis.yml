@@ -4,9 +4,9 @@ rvm:
  - 2.4.1
 notifications:
   - false
-env:
-  global:
-    - CC_TEST_REPORTER_ID=<%= ENV['CODECLIMATE_TOKEN'] %>
+# env:
+  # global:
+    # - CC_TEST_REPORTER_ID=<%= ENV['CODECLIMATE_TOKEN'] %>
 before_script:
   - createuser andeladeveloper -s -U postgres
   - createdb postit-rails-test --username=andeladeveloper
