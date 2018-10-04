@@ -45,6 +45,8 @@ group :test do
   gem 'shoulda-matchers', '4.0.0.rc1'
   gem 'rails-controller-testing' # If you are using Rails 5.x with shoudla matchers
   gem 'database_cleaner'
+  gem 'simplecov', require: false
+  gem 'simplecov-console'
 end
 
 group :development do
