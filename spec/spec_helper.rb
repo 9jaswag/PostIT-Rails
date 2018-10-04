@@ -14,11 +14,12 @@
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 require 'simplecov'
-require 'simplecov-console'
+require 'coveralls'
 
-SimpleCov.formatter = SimpleCov::Formatter::Console
-
-SimpleCov.start
+SimpleCov.formatter = Coveralls::SimpleCov::Formatter
+SimpleCov.start do
+  add_filter 'app/secrets'
+end
 
 RSpec.configure do |config|
   # rspec-expectations config goes here. You can use an alternate
