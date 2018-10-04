@@ -46,7 +46,6 @@ group :test do
   gem 'rails-controller-testing' # If you are using Rails 5.x with shoudla matchers
   gem 'database_cleaner'
   gem 'simplecov', require: false
-  # gem 'simplecov-console'
   gem 'coveralls', require: false
 end
 
