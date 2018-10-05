@@ -1,12 +1,11 @@
 module SessionsHelper
-
   # Log in a given user
   def log_in(user)
     session[:user_id] = user.id
   end
 
   # Returns true if given user is the current user
-  def current_user? (user)
+  def current_user?(user)
     user == current_user
   end
 
@@ -41,7 +40,7 @@ module SessionsHelper
   def logged_in_user
     unless logged_in?
       store_location
-      flash[:danger] = "Please sign in or create an account"
+      flash[:danger] = 'Please sign in or create an account'
       redirect_to users_path
     end
   end
@@ -56,7 +55,7 @@ module SessionsHelper
   def is_group_member(group_id)
     @group = Group.find(group_id)
     redirect_to(groups_path) unless current_user.groups.include?(@group)
-    flash[:danger] = "You do not belong to that group" unless current_user.groups.include?(@group)
+    flash[:danger] = 'You do not belong to that group' unless current_user.groups.include?(@group)
   end
 
   # return true if user is group owner
