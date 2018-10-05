@@ -15,7 +15,7 @@ class GroupsController < ApplicationController
     @group = Group.find(params[:id])
     @messages = @group.messages.paginate(page: params[:page], per_page: 6)
   rescue StandardError
-    flash[:danger] = "Group does not exist"
+    flash[:danger] = 'Group does not exist'
     redirect_to groups_path
     return
   end
@@ -30,7 +30,7 @@ class GroupsController < ApplicationController
     @group.group_members.build(user_id: current_user.id)
 
     if @group.save
-      flash[:success] = "Group created successfully"
+      flash[:success] = 'Group created successfully'
       redirect_to @group
       return
     else
@@ -44,13 +44,12 @@ class GroupsController < ApplicationController
     @users = []
     users.each do |user|
       member = group_member(user.id, params[:group_id])
-      if user.activated?
-        if member.exists?
-          @users << { user: user, is_member: true}
-        else
-          @users << { user: user, is_member: false}
-        end
-      end
+      next unless user.activated?
+      @users << if member.exists?
+                  { user: user, is_member: true }
+                else
+                  { user: user, is_member: false }
+                end
     end
 
     respond_to do |format|
@@ -61,15 +60,15 @@ class GroupsController < ApplicationController
   def add_member
     member = group_member(params[:user_id], params[:group_id])
     if member.exists?
-      @message = "User is already a group member"
+      @message = 'User is already a group member'
       respond_to do |format|
         format.js
       end
     else
       group_member = GroupMember.new(group_member_params)
-      
+
       if group_member.save
-        @message = "User has been added to group"
+        @message = 'User has been added to group'
         respond_to do |format|
           format.js
         end
@@ -87,7 +86,7 @@ class GroupsController < ApplicationController
           @message = "Why you wanna do like that? You can't leave your group"
         else
           if member.destroy(member[0].id)
-            @message = "User has been removed from group"
+            @message = 'User has been removed from group'
             puts @message
             respond_to do |format|
               format.js
@@ -109,16 +108,17 @@ class GroupsController < ApplicationController
   end
 
   private
-    def group_params
-      params.require(:group).permit(:name, :description)
-    end
 
-    def group_member_params
-      params.permit(:group_id, :user_id)
-    end
+  def group_params
+    params.require(:group).permit(:name, :description)
+  end
 
-    # returns a group member
-    def group_member(user_id, group_id)
-      member = GroupMember.where(user_id: user_id, group_id: group_id)
-    end
+  def group_member_params
+    params.permit(:group_id, :user_id)
+  end
+
+  # returns a group member
+  def group_member(user_id, group_id)
+    member = GroupMember.where(user_id: user_id, group_id: group_id)
+  end
 end

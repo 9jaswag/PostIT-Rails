@@ -2,7 +2,7 @@ class MessagesController < ApplicationController
   before_action :logged_in_user
 
   def index
-    @messages = Message.all    
+    @messages = Message.all
   end
 
   def show
@@ -11,11 +11,11 @@ class MessagesController < ApplicationController
     # Group.joins(:messages).where('group_id = ?, messages.id =?', 2, 2)
     @message = Message.find(params[:id])
     unless Group.find(params[:group_id]).messages.include?(@message)
-      flash[:danger] = "Message does not exist"
+      flash[:danger] = 'Message does not exist'
       return
     end
   rescue StandardError
-    flash[:danger] = "Message does not exist"
+    flash[:danger] = 'Message does not exist'
     redirect_to group_path(params[:group_id])
     return
   end
@@ -27,7 +27,7 @@ class MessagesController < ApplicationController
   def update
     @message = Message.find(params[:id])
     # if user hasn't read messsage
-    if @message and !@message.readby.include?(params[:user])
+    if @message && !@message.readby.include?(params[:user])
       if @message.update(readby: @message.readby << params[:user])
         redirect_to group_path(@message.group_id)
       end
@@ -40,26 +40,27 @@ class MessagesController < ApplicationController
     @message[:group_id] = params[:group_id]
     respond_to do |format|
       if @message.save
-        send_notification(@message) unless @message.priority == "normal"
+        send_notification(@message) unless @message.priority == 'normal'
         flash[:success] = 'Message was successfully created.'
         format.html { redirect_to group_message_path(id: @message[:id]) }
       else
-        format.html { render action: "new" }
+        format.html { render action: 'new' }
       end
     end
   end
-  
-  private
-    def message_params
-      params.require(:message).permit(:title, :body, :priority, :readby)
-    end
 
-    def send_notification(message)
-      groupMembers = Group.find(params[:group_id]).users
-      groupMembers.each do |member|
-        unless member.email == message.user.email
-          UserMailer.email_notification(member, message).deliver_now
-        end
+  private
+
+  def message_params
+    params.require(:message).permit(:title, :body, :priority, :readby)
+  end
+
+  def send_notification(message)
+    groupMembers = Group.find(params[:group_id]).users
+    groupMembers.each do |member|
+      unless member.email == message.user.email
+        UserMailer.email_notification(member, message).deliver_now
       end
     end
+  end
 end
