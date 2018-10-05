@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.org/9jaswag/PostIT-Rails.svg?branch=develop)](https://travis-ci.org/9jaswag/PostIT-Rails)
 [![Maintainability](https://api.codeclimate.com/v1/badges/cdc98c54daa4d6da88aa/maintainability)](https://codeclimate.com/github/9jaswag/PostIT-Rails/maintainability)
-[![Coverage Status](https://coveralls.io/repos/github/9jaswag/PostIT-Rails/badge.svg?branch=ch-collect-coverage)](https://coveralls.io/github/9jaswag/PostIT-Rails?branch=develop)
+[![Coverage Status](https://coveralls.io/repos/github/9jaswag/PostIT-Rails/badge.svg?branch=develop)](https://coveralls.io/github/9jaswag/PostIT-Rails?branch=develop)
 
 ## PostIt
 PostIt is a simple application that allows friends and colleagues create groups for notifications. Users can post broadcast messages to groups and other group members will get notification based on the message priority.
