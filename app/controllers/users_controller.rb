@@ -9,9 +9,9 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     redirect_to root_path unless @user.activated?
   rescue StandardError => e
-    flash[:danger] = "User does not exist"
+    flash[:danger] = 'User does not exist'
     redirect_to root_path
-  end    
+  end
 
   def new
     @user = User.new
@@ -23,7 +23,7 @@ class UsersController < ApplicationController
 
     if @user.save
       @user.send_activation_mail
-      flash[:success] = "Thanks for signing up. Check your email to activate your account"
+      flash[:success] = 'Thanks for signing up. Check your email to activate your account'
       # clear cookie just in case
       log_out
       redirect_to root_path
@@ -33,7 +33,8 @@ class UsersController < ApplicationController
   end
 
   private
-    def user_params
-      params.require(:user).permit(:username, :email, :phone, :password)
-    end
+
+  def user_params
+    params.require(:user).permit(:username, :email, :phone, :password)
+  end
 end

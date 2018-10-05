@@ -2,11 +2,11 @@ module ApplicationHelper
   # return the bootstrap color class to match message priority
   def message_priority(priority)
     if priority == 'normal'
-      "primary"
+      'primary'
     elsif priority == 'urgent'
-      "warning"
+      'warning'
     else
-      "danger"
+      'danger'
     end
   end
 end

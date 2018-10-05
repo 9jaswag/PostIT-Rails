@@ -30,7 +30,7 @@ RSpec.describe 'Users Controller', type: :request do
                         })
       end
       it 'creates a user' do
-        expect(User.last.username).to eq 'Troy34'
+        expect(User.last.username).to eq 'troy34'
       end
     end
   end

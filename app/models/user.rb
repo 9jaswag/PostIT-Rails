@@ -8,7 +8,7 @@ class User < ApplicationRecord
   has_many :messages
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
   validates :username, presence: true, length: { maximum: 20 },
-                        uniqueness: true
+                       uniqueness: true
   validates :email, presence: true, length: { maximum: 255 },
                     format: { with: VALID_EMAIL_REGEX },
                     uniqueness: { case_sensitive: false }
@@ -76,8 +76,9 @@ class User < ApplicationRecord
   end
 
   private
-    def create_activation_digest
-      self.activation_token = User.new_token
-      self.activation_digest = User.digest(activation_token)
-    end
+
+  def create_activation_digest
+    self.activation_token = User.new_token
+    self.activation_digest = User.digest(activation_token)
+  end
 end
