@@ -8,6 +8,14 @@ RSpec.describe 'Users Controller', type: :request do
   #   attributes_for(:new_user, password_confirmation: user.password)
   # end
 
+  # #new
+  describe '#new' do
+      it 'returns a successful response' do
+        get new_user_path
+        expect(response.success?).to eq true
+      end
+  end
+
   # #show
   describe '#show' do
     context 'when user is not signed in' do
