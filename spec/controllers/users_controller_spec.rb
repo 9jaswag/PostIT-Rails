@@ -3,16 +3,13 @@ require 'rails_helper'
 RSpec.describe 'Users Controller', type: :request do
   # initialize test data
   let!(:user) { create(:user) }
-  # let(:valid_attributes) do
-  #   attributes_for(:new_user, password_confirmation: user.password)
-  # end
 
   # new action
   describe '#new' do
-      it 'returns a successful response' do
-        get new_user_path
-        expect(response.success?).to eq true
-      end
+    it 'returns a successful response' do
+      get new_user_path
+      expect(response.success?).to eq true
+    end
   end
 
   # show action
@@ -25,12 +22,19 @@ RSpec.describe 'Users Controller', type: :request do
     end
 
     context 'when user is signed in' do
-      before do
-        sign_in user
-      end
+      before { sign_in user }
       it 'redirects the users page' do
         get user_path(id: user.id)
         expect(response.body).to include "@#{user.username}"
+      end
+    end
+
+    context 'when user does not exist' do
+      before { sign_in user }
+      it 'redirects the user to sign up page' do
+        get user_path(id: 500)
+        expect(flash[:danger]).to eq "User does not exist"
+        expect(response).to redirect_to root_path
       end
     end
   end
