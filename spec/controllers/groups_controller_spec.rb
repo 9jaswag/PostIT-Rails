@@ -11,6 +11,15 @@ RSpec.describe 'Groups Controller', type: :request do
       phone: '12345678901'
     )
   end
+  let!(:unactivated_user_attr) do
+    attributes_for(
+      :user,
+      username: Faker::Name.unique.first_name[1..6],
+      email: Faker::Internet.unique.email,
+      phone: '23456789012',
+      activated: false
+    )
+  end
   let!(:new_group_attr) do
     attributes_for(
       :group,
@@ -20,6 +29,7 @@ RSpec.describe 'Groups Controller', type: :request do
   end
   let!(:user) { create(:user) }
   let!(:user_2) { create(:user, new_user_attr) }
+  let!(:unactivated_user) { create(:user, unactivated_user_attr) }
   let!(:group) do
     create(:group, owner: user.username) do |group|
       group.users << user_2
@@ -119,6 +129,30 @@ RSpec.describe 'Groups Controller', type: :request do
       end
     end
   end
+
+  # search action
+  # describe '#search' do
+  #   context 'when user is not activated' do
+  #     before { sign_in user }
+  #     it 'does not return a user' do
+  #       # xhr :get, users_search_path, format: :js
+  #       get users_search_path(username: unactivated_user.username, group_id: group.id, format: :js, xhr: true )
+  #       # (username: unactivated_user.username, group_id: group.id )
+  #       binding.pry
+  #     end
+  #   end
+  # end
+
+  # add_member action
+  # describe '#add_member' do
+  #   context 'when user is signed in' do
+  #     before { sign_in user }
+  #     it 'adds a user to the group' do
+  #       post groups_add_member_path(group_id: group.id, user_id: user_2.id)
+  #       binding.pry
+  #     end
+  #   end
+  # end
 end
 
 # https://devhints.io/factory_bot
