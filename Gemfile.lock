@@ -1,3 +1,11 @@
+GIT
+  remote: https://github.com/stympy/faker.git
+  revision: c5ce80c27eb546227185560d032113d2cc42e94b
+  branch: master
+  specs:
+    faker (1.9.1)
+      i18n (>= 0.7)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -278,6 +286,7 @@ DEPENDENCIES
   coveralls
   database_cleaner
   factory_bot_rails
+  faker!
   figaro
   jbuilder (~> 2.5)
   jquery-rails

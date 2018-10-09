@@ -47,6 +47,7 @@ group :test do
   gem 'database_cleaner'
   gem 'simplecov', require: false
   gem 'coveralls', require: false
+  gem 'faker', :git => 'https://github.com/stympy/faker.git', :branch => 'master'
 end
 
 group :development do
