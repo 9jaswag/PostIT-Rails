@@ -131,28 +131,86 @@ RSpec.describe 'Groups Controller', type: :request do
   end
 
   # search action
-  # describe '#search' do
-  #   context 'when user is not activated' do
-  #     before { sign_in user }
-  #     it 'does not return a user' do
-  #       # xhr :get, users_search_path, format: :js
-  #       get users_search_path(username: unactivated_user.username, group_id: group.id, format: :js, xhr: true )
-  #       # (username: unactivated_user.username, group_id: group.id )
-  #       binding.pry
-  #     end
-  #   end
-  # end
+  describe '#search' do
+    context 'when user is not activated' do
+      before { sign_in user }
+      it 'does not return the user' do
+        get users_search_path(username: unactivated_user.username, group_id: group.id ), xhr: true
+        expect(response.content_type) == :js
+        expect(response.body).to include "User not found"
+      end
+    end
+
+    context 'when user is activated' do
+      before { sign_in user }
+      it 'returns the user if the user belongs to the group' do
+        get users_search_path(username: user_2.username, group_id: group.id ), xhr: true
+        expect(response.content_type) == :js
+        expect(response.body).to include "@#{user_2.username}"
+        expect(response.body).to include "Click to remove"
+      end
+
+      it 'returns a button to add the user if the user does not belongs to the group' do
+        get users_search_path(username: user.username, group_id: group.id ), xhr: true
+        expect(response.content_type) == :js
+        expect(response.body).to include "@#{user.username}"
+        expect(response.body).to include "Click to add"
+      end
+    end
+  end
 
   # add_member action
-  # describe '#add_member' do
-  #   context 'when user is signed in' do
-  #     before { sign_in user }
-  #     it 'adds a user to the group' do
-  #       post groups_add_member_path(group_id: group.id, user_id: user_2.id)
-  #       binding.pry
-  #     end
-  #   end
-  # end
+  describe '#add_member' do
+    context 'when user exists' do
+      before { sign_in user }
+      it 'does not add the user to the group if user is already a member' do
+        post groups_add_member_path(group_id: group.id, user_id: user_2.id), xhr: true
+        expect(response.body).to include "User is already a group member"
+      end
+
+      it 'adds the user to the group if user is not a member' do
+        post groups_add_member_path(group_id: group.id, user_id: user.id), xhr: true
+        expect(response.body).to include "User has been added to group"
+      end
+    end
+
+    # context 'when user does not exists' do
+    #   before { sign_in user }
+    #   it 'renders the show template' do
+    #     post groups_add_member_path(group_id: group.id, user_id: 1000), xhr: true
+    #     binding.pry
+    #     expect(response).to render_template("show")
+    #   end
+    # end
+  end
+
+  # remove member action
+  describe '#remove_member' do
+    context 'when user is not group owner' do
+      before { sign_in user_2 }
+      it 'does not remove the member' do
+        delete groups_remove_member_path(group_id: group.id, user_id: user_2.id), xhr: true
+        expect(response.body).to include "Why you wanna do like that?"
+      end
+    end
+
+    context 'when user is group owner' do
+      before do
+        sign_in user
+        add_to_group(group, user)
+      end
+
+      it 'does not remove the member if member is group owner' do
+        delete groups_remove_member_path(group_id: group.id, user_id: user.id), xhr: true
+        expect(response.body).to include "You cant leave your group"
+      end
+
+      it 'does removes the user' do
+        delete groups_remove_member_path(group_id: group.id, user_id: user_2.id), xhr: true
+        expect(response.body).to include "User has been removed from group"
+      end
+    end
+  end
 end
 
 # https://devhints.io/factory_bot
