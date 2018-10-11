@@ -48,8 +48,9 @@ RSpec.describe 'Groups Controller', type: :request do
 
     context 'when user is signed in' do
       before { sign_in user_2 }
-      it 'returns users group\'s' do
+      it 'shows users dashboard with their group\'s' do
         get groups_path
+        expect(response.body).to include 'My Dashboard'
         expect(assigns(:groups).size).to eq user_2.groups.size
         expect(assigns(:groups)[0][:group].name).to eq user_2.groups[0].name
       end
